@@ -65,8 +65,8 @@ PKGS=(
 #'plasma-desktop' # KDE Load second
 'alsa-plugins' # audio plugins
 'alsa-utils' # audio utils
-'ark' # compression
-'audiocd-kio' 
+#'ark' # compression
+#'audiocd-kio' 
 'autoconf' # build
 'automake' # build
 'base'
@@ -88,15 +88,15 @@ PKGS=(
 'cronie'
 'cups'
 'dialog'
-'discover'
+#'discover'
 #'dolphin'
 'dosfstools'
 'dtc'
 'efibootmgr' # EFI boot
-'egl-wayland'
+#'egl-wayland'
 'exfat-utils'
 'extra-cmake-modules'
-'filelight'
+#'filelight'
 'flex'
 'fuse2'
 'fuse3'
@@ -112,7 +112,7 @@ PKGS=(
 'gst-libav'
 'gst-plugins-good'
 'gst-plugins-ugly'
-'gwenview'
+#'gwenview'
 'haveged'
 'htop'
 'iptables-nft'
@@ -140,7 +140,7 @@ PKGS=(
 'lzop'
 'm4'
 'make'
-'milou'
+#'milou'
 'nano'
 'neofetch'
 'networkmanager'
@@ -150,11 +150,11 @@ PKGS=(
 'openbsd-netcat'
 'openssh'
 'os-prober'
-'oxygen'
+#'oxygen'
 'p7zip'
 'pacman-contrib'
 'patch'
-'picom'
+#'picom'
 'pkgconf'
 #'plasma-meta'
 #'plasma-nm'
@@ -193,7 +193,7 @@ PKGS=(
 'wine-gecko'
 'wine-mono'
 'winetricks'
-'xdg-desktop-portal-kde'
+#'xdg-desktop-portal-kde'
 'xdg-user-dirs'
 'zeroconf-ioslave'
 'zip'
