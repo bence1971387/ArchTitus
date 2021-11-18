@@ -27,9 +27,9 @@ PKGS=(
 'awesome-terminal-fonts'
 'brave-bin' # Brave Browser
 'dxvk-bin' # DXVK DirectX to Vulcan
-'github-desktop-bin' # Github Desktop sync
-'lightly-git'
-'lightlyshaders-git'
+#'github-desktop-bin' # Github Desktop sync
+#'lightly-git'
+#'lightlyshaders-git'
 'mangohud' # Gaming FPS Counter
 'mangohud-common'
 'nerd-fonts-fira-code'
@@ -39,7 +39,7 @@ PKGS=(
 'nordic-theme'
 'noto-fonts-emoji'
 'papirus-icon-theme'
-'plasma-pa'
+#'plasma-pa'
 'ocs-url' # install packages from websites
 'sddm-nordic-theme-git'
 'snapper-gui-git'
