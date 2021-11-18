@@ -81,8 +81,8 @@ PKGS=(
 #'breeze'
 #'breeze-gtk'
 'bridge-utils'
-'btrfs-progs'
-'celluloid' # video players
+#'btrfs-progs'
+#'celluloid' # video players
 'cmatrix'
 'code' # Visual Studio code
 'cronie'
@@ -118,8 +118,8 @@ PKGS=(
 'iptables-nft'
 'jdk-openjdk' # Java 17
 #'kate'
-'kcodecs'
-'kcoreaddons'
+#'kcodecs'
+#'kcoreaddons'
 #'kdeplasma-addons'
 #'kde-gtk-config'
 #'kinfocenter'
@@ -172,8 +172,8 @@ PKGS=(
 #'rsync'
 #'sddm'
 #'sddm-kcm'
-'snapper'
-'spectacle'
+#'snapper'
+#'spectacle'
 'steam'
 'sudo'
 'swtpm'
