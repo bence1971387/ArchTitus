@@ -30,7 +30,7 @@ echo -e "-Setting up $iso mirrors for faster downloads"
 echo -e "-------------------------------------------------------------------------"
 
 reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
-mkdir /mnt
+#mkdir /mnt
 
 
 echo -e "\nInstalling prereqs...\n$HR"
@@ -56,23 +56,23 @@ sgdisk -Z ${DISK} # zap all on disk
 sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 
 # create partitions
-sgdisk -n 1::+1M --typecode=1:ef02 --change-name=1:'BIOSBOOT' ${DISK} # partition 1 (BIOS Boot Partition)
-sgdisk -n 2::+100M --typecode=2:ef00 --change-name=2:'EFIBOOT' ${DISK} # partition 2 (UEFI Boot Partition)
-sgdisk -n 3::-0 --typecode=3:8300 --change-name=3:'ROOT' ${DISK} # partition 3 (Root), default start, remaining
-if [[ ! -d "/sys/firmware/efi" ]]; then
-    sgdisk -A 1:set:2 ${DISK}
-fi
+#sgdisk -n 1::+1M --typecode=1:ef02 --change-name=1:'BIOSBOOT' ${DISK} # partition 1 (BIOS Boot Partition)
+sgdisk -n 1::+100M --typecode=1:ef00 --change-name=1:'EFIBOOT' ${DISK} # partition 2 (UEFI Boot Partition)
+sgdisk -n 2::-0 --typecode=2:8300 --change-name=2:'ROOT' ${DISK} # partition 3 (Root), default start, remaining
+#if [[ ! -d "/sys/firmware/efi" ]]; then
+#    sgdisk -A 1:set:2 ${DISK}
+#fi
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
 if [[ ${DISK} =~ "nvme" ]]; then
-mkfs.vfat -F32 -n "EFIBOOT" "${DISK}p2"
-mkfs.ext4 -L "ROOT" "${DISK}p3" -f
-mount -t ext4 "${DISK}p3" /mnt
+mkfs.vfat -F32 -n "EFIBOOT" "${DISK}p1"
+mkfs.ext4 -L "ROOT" "${DISK}p2" -f
+mount -t ext4 "${DISK}p2" /mnt
 else
-mkfs.vfat -F32 -n "EFIBOOT" "${DISK}2"
-mkfs.ext4 -L "ROOT" "${DISK}3" -f
-mount -t ext4 "${DISK}3" /mnt
+mkfs.vfat -F32 -n "EFIBOOT" "${DISK}1"
+mkfs.ext4 -L "ROOT" "${DISK}2" -f
+mount -t ext4 "${DISK}2" /mnt
 fi
 #ls /mnt | xargs btrfs subvolume delete
 #btrfs subvolume create /mnt/@
@@ -87,9 +87,10 @@ reboot now
 esac
 
 # mount target
-#mount -t ext4 -L ROOT /mnt
-mkdir /mnt/efi
-mount -t vfat -L EFIBOOT /mnt/efi/
+#mount -t btrfs -o subvol=@ -L ROOT /mnt
+mkdir /mnt/boot
+mkdir /mnt/boot/efi
+mount -t vfat -L EFIBOOT /mnt/boot/
 
 if ! grep -qs '/mnt' /proc/mounts; then
     echo "Drive is not mounted can not continue"
@@ -111,7 +112,7 @@ echo "--------------------------------------"
 echo "--GRUB BIOS Bootloader Install&Check--"
 echo "--------------------------------------"
 if [[ ! -d "/sys/firmware/efi" ]]; then
-    grub-install --boot-directory=/mnt/boot ${DISK}
+    grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/mnt/boot/efi
 fi
 echo "--------------------------------------"
 echo "-- Check for low memory systems <8G --"
@@ -120,7 +121,7 @@ TOTALMEM=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[[:digit:]]*')
 if [[  $TOTALMEM -lt 8000000 ]]; then
     #Put swap into the actual system, not into RAM disk, otherwise there is no point in it, it'll cache RAM into RAM. So, /mnt/ everything.
     mkdir /mnt/opt/swap #make a dir that we can apply NOCOW to to make it btrfs-friendly.
-    chattr +C /mnt/opt/swap #apply NOCOW, btrfs needs that.
+    #chattr +C /mnt/opt/swap #apply NOCOW, btrfs needs that.
     dd if=/dev/zero of=/mnt/opt/swap/swapfile bs=1M count=2048 status=progress
     chmod 600 /mnt/opt/swap/swapfile #set permissions.
     chown root /mnt/opt/swap/swapfile
