@@ -6,7 +6,7 @@ timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
 sed -i 's/^#Para/Para/' /etc/pacman.conf
-pacman -S --noconfirm reflector grub
+pacman -S --noconfirm reflector grub rsync
 reflector -c Hungary -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 
 echo "Enter disk (example /dev/sda)"
