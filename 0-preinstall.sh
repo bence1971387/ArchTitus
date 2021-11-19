@@ -76,7 +76,7 @@ mount -t ext4 "${DISK}3" /mnt
 fi
 #ls /mnt | xargs btrfs subvolume delete
 #btrfs subvolume create /mnt/@
-umount /mnt
+#umount /mnt
 ;;
 *)
 echo "Rebooting in 3 Seconds ..." && sleep 1
@@ -87,10 +87,9 @@ reboot now
 esac
 
 # mount target
-mount -t ext4 -L ROOT /mnt
-mkdir /mnt/boot
-mkdir /mnt/boot/efi
-mount -t vfat -L EFIBOOT /mnt/boot/
+#mount -t ext4 -L ROOT /mnt
+mkdir /mnt/efi
+mount -t vfat -L EFIBOOT /mnt/efi/
 
 if ! grep -qs '/mnt' /proc/mounts; then
     echo "Drive is not mounted can not continue"
