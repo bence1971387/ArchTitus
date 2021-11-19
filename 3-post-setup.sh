@@ -20,9 +20,9 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # ------------------------------------------------------------------------
 
 echo -e "\nEnabling Login Display Manager"
-systemctl enable sddm.service
-echo -e "\nSetup SDDM Theme"
-cat <<EOF > /etc/sddm.conf
+#systemctl enable sddm.service
+#echo -e "\nSetup SDDM Theme"
+#cat <<EOF > /etc/sddm.conf
 [Theme]
 Current=Nordic
 EOF

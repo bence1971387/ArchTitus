@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+SCRIPT_DIR="$( cd -- "$(dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib terminus-font
 setfont ter-v22b
@@ -22,6 +24,8 @@ mount -t ext4 "${DISK}2" /mnt
 
 pacstrap /mnt base base-devel linux linux-firmware vim sudo archlinux-keyring wget libnewt --noconfirm --needed
 genfstab -U /mnt >> /mnt/etc/fstab
+
+cp -R ${SCRIPT_DIR} /mnt/root/ArchTitus
 
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
