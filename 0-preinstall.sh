@@ -73,12 +73,12 @@ else
 mkfs.vfat -F32 -n "EFIBOOT" "${DISK}2"
 mkfs.ext4 -L "ROOT" "${DISK}3" -f
 mount -t ext4 "${DISK}3" /mnt
-#fi
+fi
 #ls /mnt | xargs btrfs subvolume delete
 #btrfs subvolume create /mnt/@
-#umount /mnt
-#;;
-#*)
+umount /mnt
+;;
+*)
 echo "Rebooting in 3 Seconds ..." && sleep 1
 echo "Rebooting in 2 Seconds ..." && sleep 1
 echo "Rebooting in 1 Second ..." && sleep 1
