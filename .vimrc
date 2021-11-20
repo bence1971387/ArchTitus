@@ -1,0 +1,11 @@
+"packadd! dracula
+"colorscheme dracula
+set relativenumber
+syntax on
+set expandtab
+set tabstop=2
+set autoindent
+"set cursorline
+"set  rtp+=/usr/local/lib/python3.9/dist-packages/powerline/bindings/vim/
+set laststatus=1
+set t_Co=256
