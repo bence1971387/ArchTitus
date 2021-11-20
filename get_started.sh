@@ -25,14 +25,17 @@ mount -t ext4 "${DISK}2" /mnt
 pacstrap /mnt base base-devel linux linux-firmware vim sudo archlinux-keyring wget libnewt --noconfirm --needed
 genfstab -U /mnt >> /mnt/etc/fstab
 
-cp -R ${SCRIPT_DIR} /mnt/root/ArchTitus
+arch-chroot /mnt
+#cp -R ${SCRIPT_DIR} /mnt/root/ArchTitus
+
+timedatectl set-timezone Europe/Budapest
 
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount -t vfat -L EFIBOOT /mnt/boot/efi
 
-#grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/mnt/boot/efi
-#grub-mkconfig -o /mnt/boot/grub/grub.cfg
+grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/mnt/boot/efi
+grub-mkconfig -o /mnt/boot/grub/grub.cfg
 
 mkdir /mnt/opt/swap
 dd if=/dev/zero of=/mnt/opt/swap/swapfile bs=1M count=4096 status=progress
