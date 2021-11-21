@@ -128,9 +128,6 @@ alias startcarla="nohup carla ./dt990eq.carxp > /dev/null 2>&1 &"
 alias jackrecord="jack_capture --port Calf\ Compressor:Out\ L --port Calf\ Compressor:Out\ R"
 alias topright="nohup polybar topright > /dev/null 2>&1 &"
 alias topleft="nohup polybar topleft > /dev/null 2>&1 &"
-alias tebuzi="cowsay TEVAGYABUZI | lolcat"
-alias civecke='figlet -f /usr/share/figlet/fonts/Epic "Cintike: <3 ^-^" | lolcat'
-alias udenálamalszikahétenCintike="cowsay 'Igen, persze, hiszen olyan tökéletes vagy. ^-^' | lolcat"
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 source $ZSH/oh-my-zsh.sh
 
